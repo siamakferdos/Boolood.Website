@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <UserSecretsId>aspnet-Boolood.Website-A57E0807-A73C-424D-B127-BD293BF45F3A</UserSecretsId>
+    <UserSecretsId>aspnet-Boolood.Website-6010C64F-C8FB-4949-8096-4D800A3CAC83</UserSecretsId>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
@@ -10,6 +10,20 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Boolood.Configuration\Boolood.Configuration.csproj" />
+    <ProjectReference Include="..\Boolood.Persistence\Boolood.Persistence.csproj" />
+    <ProjectReference Include="..\Boolood.Services\Boolood.Services.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="wwwroot\adminpanel\" />
   </ItemGroup>
 
 </Project>

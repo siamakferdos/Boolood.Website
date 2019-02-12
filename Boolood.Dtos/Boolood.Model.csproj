@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyName>Boolood.Model</AssemblyName>
+    <RootNamespace>Boolood.Model</RootNamespace>
+  </PropertyGroup>
+
+</Project>
