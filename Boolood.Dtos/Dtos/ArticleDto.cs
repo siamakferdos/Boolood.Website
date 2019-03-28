@@ -12,6 +12,7 @@ namespace Boolood.Model.Dtos
         public Guid LanguageId { get; set; }
         public int AuthorId { get; set; }
         public bool IsAccepted { get; set; }
+        public string Tags { get; set; }
 
     }
 }

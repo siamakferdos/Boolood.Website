@@ -8,6 +8,5 @@ namespace Boolood.Framework.Core.Services
     public interface IArticleService
     {
         void AddArticle(ArticleDto article);
-        void GetCategories();
     }
 }

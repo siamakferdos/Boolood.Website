@@ -11,5 +11,6 @@ namespace Boolood.Website.Areas.Admin.Models
         public List<CategoryDto> Categories { get; set; }
         public List<LanguageDto> Languages { get; set; }
         public ArticleDto Article { get; set; }
+        public List<string> Errors { get; set; }
     }
 }

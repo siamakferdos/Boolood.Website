@@ -1,9 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Boolood.Framework.Core.Query;
-using Boolood.Framework.Core.Repository;
+using Boolood.Framework.Core.Services;
 using Boolood.Model.Dtos;
 using Boolood.Website.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -13,15 +12,15 @@ namespace Boolood.Website.Areas.Admin.Controllers
     [Area("Admin")]
     public class ArticleController : Controller
     {
-        private readonly IArticleRepository _articleRepository;
+        private readonly IArticleService _articleService;
         private readonly IArticleQuery _articleQuery;
         private readonly ILanguageQuery _languageQuery;
 
         public ArticleController(
-            IArticleRepository articleRepository, 
+            IArticleService articleService, 
             IArticleQuery articleQuery, ILanguageQuery languageQuery)
         {
-            _articleRepository = articleRepository;
+            _articleService = articleService;
             _articleQuery = articleQuery;
             _languageQuery = languageQuery;
         }
@@ -41,9 +40,34 @@ namespace Boolood.Website.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddArticle(ArticleViewModel article)
+        public IActionResult AddArticle(ArticleDto article)
         {
-            return View();
+            var articleViewModel = InitialArticleViewModel();
+            try
+            {
+                throw new Exception("DD");
+                _articleService.AddArticle(article);
+                ModelState.Clear();
+                return View("AddArticle", articleViewModel);
+            }
+            catch (Exception e)
+            {
+                articleViewModel.Errors.Add(e.Message);
+                return View("AddArticle", articleViewModel);
+            }
+        }
+
+        private ArticleViewModel InitialArticleViewModel()
+        {
+            var categories = _articleQuery.GetCategories();
+            var languages = _languageQuery.GetLanguages();
+            return new ArticleViewModel
+            {
+                Article = new ArticleDto(),
+                Languages = languages,
+                Categories = categories,
+                Errors = new List<string>()
+            };
         }
     }
 }

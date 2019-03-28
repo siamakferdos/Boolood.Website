@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Boolood.Persistence.DbContext;
+﻿using Boolood.Persistence.DbContext;
 using Boolood.Services.Initial;
 using Common.ApplicationIdentity;
 using Microsoft.AspNetCore.Builder;
@@ -48,8 +44,8 @@ namespace Boolood.Website
 
             new Boolood.Configuration.Registrar().Register(services);
 
-            
 
+          
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -69,7 +65,6 @@ namespace Boolood.Website
                 //app.UseHsts();
             }
 
-            
             app.UseStaticFiles();
             app.UseCookiePolicy();
 

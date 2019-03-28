@@ -36,7 +36,7 @@ namespace Boolood.Configuration
             services.AddScoped<IArticleService, Services.ArticleContext.Article>();
 
             services.AddScoped<ILanguageQuery, LanguageQuery>();
-            services.AddScoped<ILanguageBasedService, Services.CultureContext.Language>();
+            services.AddScoped<ILanguageService, Services.CultureContext.Language>();
 
             services.AddScoped<InitializerService>();
         }

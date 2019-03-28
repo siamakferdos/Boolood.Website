@@ -14,10 +14,12 @@ namespace Boolood.Model.Mapper
                 Title = articleDto.Title,
                 Body = articleDto.Body,
                 Summary = articleDto.Summary,
+                Tags = articleDto.Tags,
                 AuthorId = articleDto.AuthorId,
                 IsAccepted = articleDto.IsAccepted,
                 LanguageId = articleDto.LanguageId,
                 CreationDate = articleDto.CreationDate
+
             };
         }
 
@@ -30,6 +32,7 @@ namespace Boolood.Model.Mapper
                 Title = article.Title,
                 Body = article.Body,
                 Summary = article.Summary,
+                Tags = article.Tags,
                 AuthorId = article.AuthorId,
                 IsAccepted = article.IsAccepted,
                 LanguageId = article.LanguageId,

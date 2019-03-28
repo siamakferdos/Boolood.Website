@@ -25,12 +25,14 @@ namespace Boolood.Services.ArticleContext
 
         public void AddArticle(ArticleDto article)
         {
-            if (!HasAuthorPermissionToThisCategory(article.AuthorId, article.CategoryId))
-                throw new HasNotPermissionToCategoryException();
-            CheckArticleSummaryLenght(article.Summary);
+            //if (!HasAuthorPermissionToThisCategory(article.AuthorId, article.CategoryId))
+            //    throw new HasNotPermissionToCategoryException();
+            //CheckArticleSummaryLenght(article.Summary);
 
             _articleRepository.AddArticle(article.MapToDbModel());
+            _articleRepository.SaveChanges();
         }
+   
 
         private static void CheckArticleSummaryLenght(string summary)
         {
