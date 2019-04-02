@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Boolood.Dtos;
+using Microsoft.AspNetCore.Http;
 
 namespace Boolood.Model.Dtos
 {
@@ -13,6 +15,10 @@ namespace Boolood.Model.Dtos
         public int AuthorId { get; set; }
         public bool IsAccepted { get; set; }
         public string Tags { get; set; }
+        public IFormFile MainImage { get; set; }
+        public IFormFile SummaryImage { get; set; }
+        public IFormFile ThumbnailImage { get; set; }
+        public List<IFormFile> Videos { get; set; }
 
     }
 }

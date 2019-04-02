@@ -7,6 +7,6 @@ namespace Boolood.Framework.Core.Repository
 {
     public interface ILanguageRepository: IRepositoryBase
     {
-        void AddLanguage(Language language);
+        void AddLanguage(Model.DbModels.Language language);
     }
 }

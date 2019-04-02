@@ -29,7 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boolood.Security", "Boolood
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boolood.Framework.Core", "Boolood.Framework.Core\Boolood.Framework.Core.csproj", "{79351C48-5865-4EE5-8E84-29F318615350}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boolood.Read", "Boolood.Read\Boolood.Read.csproj", "{131B5D85-ADFB-407F-BA80-1706C4B9E517}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boolood.Read", "Boolood.Read\Boolood.Read.csproj", "{131B5D85-ADFB-407F-BA80-1706C4B9E517}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boolood.Utility", "Boolood.Utility\Boolood.Utility.csproj", "{3F816ED7-4743-420D-919E-D2FA8A62DFEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,10 @@ Global
 		{131B5D85-ADFB-407F-BA80-1706C4B9E517}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{131B5D85-ADFB-407F-BA80-1706C4B9E517}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{131B5D85-ADFB-407F-BA80-1706C4B9E517}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F816ED7-4743-420D-919E-D2FA8A62DFEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F816ED7-4743-420D-919E-D2FA8A62DFEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F816ED7-4743-420D-919E-D2FA8A62DFEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F816ED7-4743-420D-919E-D2FA8A62DFEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

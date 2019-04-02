@@ -10,8 +10,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Boolood.Dtos\Boolood.Model.csproj" />
+    <ProjectReference Include="..\Boolood.Framework\Boolood.Framework.csproj" />
     <ProjectReference Include="..\Boolood.Infrastructure\Boolood.Infrastructure.csproj" />
     <ProjectReference Include="..\Boolood.Read\Boolood.Read.csproj" />
+    <ProjectReference Include="..\Boolood.Utility\Boolood.Utility.csproj" />
   </ItemGroup>
 
 </Project>

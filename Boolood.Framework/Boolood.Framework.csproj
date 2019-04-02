@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Boolood.Dtos\Boolood.Model.csproj" />
+    <ProjectReference Include="..\Boolood.Framework.Core\Boolood.Framework.Core.csproj" />
+    <ProjectReference Include="..\Boolood.Resources\Boolood.Resources.csproj" />
     <ProjectReference Include="..\Common.ApplicationIdentity\Common.ApplicationIdentity.csproj" />
   </ItemGroup>
 
