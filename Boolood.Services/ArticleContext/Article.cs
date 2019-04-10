@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Boolood.Dtos;
-using Boolood.Dtos.Mapper;
-using Boolood.Framework.Core.Query;
 using Boolood.Framework.Core.Repository;
 using Boolood.Framework.Core.Services;
 using Boolood.Framework.Pattern;
-using Boolood.Framework.Repository;
 using Boolood.Model.Dtos;
 using Boolood.Model.Mapper;
-using Boolood.Read;
+using Boolood.Model.Settings;
 using Boolood.Services.ArticleContext.Exception;
+using Boolood.Services.ArticleContext.File;
+using Boolood.Services.ArticleContext.Validator;
+using Boolood.Utility;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
 
 namespace Boolood.Services.ArticleContext
 {
-    public class Article: IArticleService
+    public class Article : IArticleService
     {
         private readonly IArticleRepository _articleRepository;
 
@@ -28,39 +24,66 @@ namespace Boolood.Services.ArticleContext
 
         public void AddArticle(ArticleDto article)
         {
-            //if (!HasAuthorPermissionToThisCategory(article.AuthorId, article.CategoryId))
-            //    throw new HasNotPermissionToCategoryException();
-            //CheckArticleSummaryLenght(article.Summary);
+            CheckArticleTexts(article);
+            CheckArticleFiles(article);
 
-            var articleValidator = new CommandsHandler();
-            var articleFileSaver = new CommandsHandler();
-            var articleMainImage = new ArticleMainImage(articleValidator, articleFileSaver, article.MainImage, "");
-            var articleSummaryImage = new ArticleSummaryImage(articleValidator, articleFileSaver, article.MainImage, "");
-            var articleVideos = new List<ArticleVideo>();
-            article.Videos.ForEach(v =>
-                articleVideos.Add(new ArticleVideo(articleValidator, articleFileSaver, v, "")));
-            articleValidator.ExecuteAll();
-            articleFileSaver.ExecuteAll();
-
-            _articleRepository.AddArticle(article.MapToDbModel());
+            if (article.Id == Guid.Empty)
+            {
+                var articleDbModel = article.MapToDbModel();
+                _articleRepository.AddArticle(articleDbModel);
+                article.Id = articleDbModel.Id;
+            }
+            else
+            {
+                var articleInDb = _articleRepository.GetArticle(article.Id);
+                article.MapToDbModel(articleInDb);
+            }
             _articleRepository.SaveChanges();
+
+            ArticleFile.SaveArticleImages(article);
         }
 
-        public void AddArticleImages(FormFile file)
-        {
-            
-        }
-   
 
-        private static void CheckArticleSummaryLenght(string summary)
+        public static void CheckArticleFiles(ArticleDto article)
         {
-            if (summary.Length < 20 || summary.Length > 200)
-                throw new ArticleSummaryInvalidLengthException();
+            CommandsHandler articleValidator = new CommandsHandler();
+            new ArticleMainImageValidator(articleValidator, article.MainImage);
+            new ArticleSummaryImageValidator(articleValidator, article.SummaryImage);
+            new ArticleThumbnailsImageValidator(articleValidator, article.ThumbnailImage);
+
+            articleValidator.ExecuteAll();
         }
 
-        public bool HasAuthorPermissionToThisCategory(int authorId, Guid categoryId)
+        public void CheckArticleTitle(string title)
         {
-            return true;
+            if (title.Length > ArticleSettings.ArticleTitleMaxLenght)
+            {
+                throw new ArticleTextInvalidLengthException(
+                    "عنوان"
+                    , ArticleSettings.ArticleTitleMaxLenght);
+            }
+        }
+
+        public void CheckArticleSummary(string summary)
+        {
+            if (summary.Length > ArticleSettings.ArticleSummaryMaxLenght)
+            {
+                throw new ArticleTextInvalidLengthException(
+                    "خلاصه"
+                    , ArticleSettings.ArticleSummaryMaxLenght);
+            }
+        }
+
+        public void CheckArticleBody(string body)
+        {
+            ArticleBodyValidator.CheckArticleBodyRules(body);
+        }
+
+        private void CheckArticleTexts(ArticleDto article)
+        {
+            CheckArticleTitle(article.Title);
+            CheckArticleSummary(article.Summary);
+            CheckArticleBody(article.Body);
         }
     }
 }

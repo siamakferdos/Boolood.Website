@@ -7,11 +7,13 @@ using Boolood.Framework.Core.Repository;
 using Boolood.Framework.Core.Services;
 using Boolood.Framework.DI;
 using Boolood.Framework.Repository;
+using Boolood.Framework.Website;
 using Boolood.Infrastructure;
 using Boolood.Persistence.DbContext;
 using Boolood.Read;
 using Boolood.Services.Initial;
 using Common.ApplicationIdentity;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,7 +39,7 @@ namespace Boolood.Configuration
 
             services.AddScoped<ILanguageQuery, LanguageQuery>();
             services.AddScoped<ILanguageService, Services.CultureContext.Language>();
-
+            
             services.AddScoped<InitializerService>();
         }
     }

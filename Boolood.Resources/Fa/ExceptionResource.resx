@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ArticleBodyInvalidImageCountException" xml:space="preserve">
+    <value>تعداد تصاویر متن اصلی از {0} عدد بیشتر است</value>
+  </data>
+  <data name="ArticleBodyInvalidImageSizeException" xml:space="preserve">
+    <value>اندازه تصویر {0} ام متن اصلی از {1} کیلو بایت بیشتر است</value>
+  </data>
+  <data name="ArticleTextInvalidLengthException" xml:space="preserve">
+    <value>اندازه {0} مقاله از {1} کاراکتر بیشتر است</value>
+  </data>
   <data name="InvalidArticleImageFormatEcxeption" xml:space="preserve">
     <value>فرمت تصویر{0} jpeg یا png باید باشد</value>
   </data>

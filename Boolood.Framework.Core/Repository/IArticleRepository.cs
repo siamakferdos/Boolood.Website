@@ -8,8 +8,8 @@ namespace Boolood.Framework.Core.Repository
     public interface IArticleRepository: IRepositoryBase
     {
         void AddArticle(Article article);
-        void AcceptArticle(Guid articleId);
-        List<Category> GetAllCategories();
         void AddCategory(Category category);
+        List<Category> GetAllCategories();
+        Article GetArticle(Guid id);
     }
 }

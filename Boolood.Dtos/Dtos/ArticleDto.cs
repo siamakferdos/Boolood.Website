@@ -18,7 +18,6 @@ namespace Boolood.Model.Dtos
         public IFormFile MainImage { get; set; }
         public IFormFile SummaryImage { get; set; }
         public IFormFile ThumbnailImage { get; set; }
-        public List<IFormFile> Videos { get; set; }
 
     }
 }

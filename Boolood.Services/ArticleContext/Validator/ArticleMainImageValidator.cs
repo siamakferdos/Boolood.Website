@@ -1,16 +1,15 @@
-﻿using System.IO;
-using Boolood.Framework.Pattern;
+﻿using Boolood.Framework.Pattern;
 using Boolood.Model.Settings;
 using Boolood.Services.ArticleContext.Exception;
 using Boolood.Utility;
 using Microsoft.AspNetCore.Http;
 
-namespace Boolood.Services.ArticleContext
+namespace Boolood.Services.ArticleContext.Validator
 {
-    public class ArticleMainImage : ArticleImage
+    public class ArticleMainImageValidator : ArticleImageValidator
     {
-        public ArticleMainImage(CommandsHandler validator, CommandsHandler saver, IFormFile file, string path)
-            : base(validator, saver, file, path)
+        public ArticleMainImageValidator(CommandsHandler validator, IFormFile file)
+            : base(validator, file)
         {
             validator.AddCommand(CheckImageDimensions);
         }
@@ -25,12 +24,13 @@ namespace Boolood.Services.ArticleContext
         public void CheckImageDimensions()
         {
             var imageRaito = ImageUtility.GetImageRaito(FormForm);
-            if (imageRaito > ArticleSettings.ArticleMainImageMaxRaito ||
-                imageRaito < ArticleSettings.ArticleMainImageMinRaito)
+            if (imageRaito < ArticleSettings.ArticleMainImageMinRaito ||
+                imageRaito > ArticleSettings.ArticleMainImageMaxRaito
+                )
                 throw new InvalidArticleImageRaitoException(
                     FormForm.FileName, 
                     ArticleSettings.ArticleMainImageMinRaito,
-                    ArticleSettings.ArticleMainImageMinRaito
+                    ArticleSettings.ArticleMainImageMaxRaito
                     );
         }
     }

@@ -33,7 +33,6 @@
         <div class="form-group">
             <label class="col-md-3 control-label">Category</label>
             <div class="col-md-6">
-
                 <select asp-for="Article.CategoryId" data-plugin-selectTwo class="form-control populate">
                     @foreach (var cat in Model.Categories.Where(c => c.ParentId == null))
                     {
@@ -82,17 +81,17 @@
 
        <div class="form-group">
             <label for="img1024px">Upload file with 1024px width </label>
-           <input type="file" class="img-uploader form-control-file" name="img1024px" id="img1024px">
+           <input type="file" class="img-uploader form-control-file" asp-for="Article.MainImage" id="img1024px">
            <img class="preview-images" id="preview_img1024px"/>
         </div>
        <div class="form-group">
            <label for="img768px">Upload file with 768px width </label>
-           <input type="file" class="img-uploader form-control-file" name="img768px" id="img768px">
+           <input type="file" class="img-uploader form-control-file" asp-for="Article.SummaryImage" id="img768px">
            <img class="preview-images" id="preview_img768px" />
        </div>
        <div class="form-group">
            <label for="img300px">Upload file with 300px*300px width and height </label>
-           <input type="file" class="img-uploader form-control-file" name="img300px" id="img300px">
+           <input type="file" class="img-uploader form-control-file" asp-for="Article.ThumbnailImage" id="img300px">
            <img class="preview-images" id="preview_img300px" />
        </div>
 

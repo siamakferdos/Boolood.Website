@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ArticleContext\ArticleFileValidator.cs" />
+    <Compile Remove="ArticleContext\ArticleImageValidator.cs" />
+    <Compile Remove="ArticleContext\ArticleMainImageValidator.cs" />
+    <Compile Remove="ArticleContext\ArticleSummaryImageValidator.cs" />
+    <Compile Remove="ArticleContext\ArticleThumbnailsImageValidator.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
   </ItemGroup>
 

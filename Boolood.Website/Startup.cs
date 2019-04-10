@@ -1,4 +1,5 @@
-﻿using Boolood.Persistence.DbContext;
+﻿using Boolood.Framework.Website;
+using Boolood.Persistence.DbContext;
 using Boolood.Services.Initial;
 using Common.ApplicationIdentity;
 using Microsoft.AspNetCore.Builder;
@@ -50,8 +51,11 @@ namespace Boolood.Website
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, InitializerService initializer)
+        public void Configure(IApplicationBuilder app, 
+            IHostingEnvironment env, 
+            InitializerService initializer)
         {
+            new WebsiteInfo(env);
             initializer.Initialize();
             if (env.IsDevelopment())
             {

@@ -18,16 +18,17 @@ namespace Boolood.Infrastructure
             AddEntity(category);
         }
 
+        public Article GetArticle(Guid id)
+        {
+            return GetEntity<Article>(id);
+        }
+
         public void AddArticle(Article article)
         {
             AddEntity(article);
         }
 
-        public void AcceptArticle(Guid articleId)
-        {
-            throw new NotImplementedException();
-        }
-
+      
         public List<Category> GetAllCategories()
         {
             return GetAllEntities<Category>();

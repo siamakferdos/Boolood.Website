@@ -61,6 +61,33 @@ namespace Boolood.Resources.Fa {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تعداد تصاویر متن اصلی از {0} عدد بیشتر است.
+        /// </summary>
+        public static string ArticleBodyInvalidImageCountException {
+            get {
+                return ResourceManager.GetString("ArticleBodyInvalidImageCountException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اندازه تصویر {0} ام متن اصلی از {1} کیلو بایت بیشتر است.
+        /// </summary>
+        public static string ArticleBodyInvalidImageSizeException {
+            get {
+                return ResourceManager.GetString("ArticleBodyInvalidImageSizeException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اندازه {0} مقاله از {1} کاراکتر بیشتر است.
+        /// </summary>
+        public static string ArticleTextInvalidLengthException {
+            get {
+                return ResourceManager.GetString("ArticleTextInvalidLengthException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to فرمت تصویر{0} jpeg یا png باید باشد.
         /// </summary>
         public static string InvalidArticleImageFormatEcxeption {

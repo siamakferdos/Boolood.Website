@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Boolood.Framework.Core.Services;
-using Boolood.Framework.Pattern;
+﻿using Boolood.Framework.Core.Services;
 using Boolood.Services.ArticleContext;
 using Boolood.Services.ArticleContext.Exception;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
+using Boolood.Tests.Mock;
 using Moq;
 using Xunit;
 
@@ -17,67 +9,73 @@ namespace Boolood.Tests
 {
     public class ArticleTest
     {
-        private ArticleMainImage _articleMainImage;
-        private ArticleSummaryImage _articleSummaryImage;
-        private ArticleThumbnailsImage _articleThumbnailsImage;
+        private IArticleService _articleService;
         public ArticleTest()
         {
-            var validator1 = new CommandsHandler();
-            var validator2 = new CommandsHandler();
-            var imgMainFormFile = MockFile.MakeFormFile("ArticleMock", "article-main.jpg");
-            var imgSummaryFormFile = MockFile.MakeFormFile("ArticleMock", "article-summary.jpg");
-            var imgThumbnailFormFile = MockFile.MakeFormFile("ArticleMock", "article-thumbnail.jpg");
-            _articleMainImage = new ArticleMainImage(
-                validator1,
-                validator2,
-                imgMainFormFile,
-                "");
-            _articleSummaryImage = new ArticleSummaryImage(
-                validator1,
-                validator2,
-                imgSummaryFormFile,
-                "");
-            _articleThumbnailsImage = new ArticleThumbnailsImage(
-                validator1,
-                validator2,
-                imgThumbnailFormFile,
-                "");
-        }
-      
-        [Fact]
-        public void CheckFileRules_MainImageSizeExceed500KB_InvalidArticleImageSizeException()
-        {
-            Assert.Throws<InvalidArticleImageSizeException>(() => _articleMainImage.CheckFileRules());
+            _articleService = new Article(null);
         }
 
         [Fact]
-        public void CheckFileRules_SummaryImageSizeExceed250KB_InvalidArticleImageSizeException()
+        public void CheckTitle_53CharTitle_PassTest()
         {
-            Assert.Throws<InvalidArticleImageSizeException>(() => _articleSummaryImage.CheckFileRules());
+            _articleService.CheckArticleTitle(
+                    MockArticle.GetPassTitleText());
+        }
+        [Fact]
+        public void CheckSummary_197CharSummary_PassTest()
+        {
+            _articleService.CheckArticleSummary(
+                MockArticle.GetPassSummaryText());
+        }
+        [Fact]
+        public void CheckTitle_4037CharBody_PassTest()
+        {
+            _articleService.CheckArticleBody(
+                MockArticle.GetPassBodyText());
+        }
+        [Fact]
+        public void CheckTitle_ExceedFromMaxLenght_ArticleTextInvalidLengthException()
+        {
+            Assert.Throws<ArticleTextInvalidLengthException>(
+                () => _articleService.CheckArticleTitle(
+                    MockArticle.GetFailTitleText()));
+        }
+        [Fact]
+        public void CheckSummary_ExceedFromMaxLenght_ArticleTextInvalidLengthException()
+        {
+            Assert.Throws<ArticleTextInvalidLengthException>(
+                () => _articleService.CheckArticleSummary(
+                    MockArticle.GetFailSummaryText()));
+        }
+        [Fact]
+        public void CheckBody_ExceedFromMaxLenght_ArticleTextInvalidLengthException()
+        {
+            Assert.Throws<ArticleTextInvalidLengthException>(
+                () => _articleService.CheckArticleBody(
+                    MockArticle.GetFailBodyText()));
         }
 
         [Fact]
-        public void CheckFileRules_TumbnailImageSizeExceed100KB_InvalidArticleImageSizeException()
+        public void CheckBody_Contains11ImageInBody_ArticleBodyInvalidImageCountException()
         {
-            Assert.Throws<InvalidArticleImageSizeException>(() => _articleThumbnailsImage.CheckFileRules());
+            Assert.Throws<ArticleBodyInvalidImageCountException>(
+                () => _articleService.CheckArticleBody(
+                    MockArticle.GetBodyTextContainsMoreThan10Images()));
         }
 
         [Fact]
-        public void CheckImageDimensions_MainImageRaitoOuOf1And15_InvalidArticleImageRaitoException()
+        public void CheckBody_ContainsLargeImageInBody_ArticleBodyInvalidImageSizeException()
         {
-            Assert.Throws<InvalidArticleImageRaitoException>(() => _articleMainImage.CheckImageDimensions());
+            Assert.Throws<ArticleBodyInvalidImageSizeException>(
+                () => _articleService.CheckArticleBody(
+                    MockArticle.GetBodyTextContainsLargeThan200KbImage()));
         }
 
         [Fact]
-        public void CheckImageDimensions_SummaryImageSizeExceed250KB_InvalidArticleImageSizeException()
+        public void CheckBody_Contains8ImageAndNoLargeImageInBody_PassTest()
         {
-            Assert.Throws<InvalidArticleImageSizeException>(() => _articleSummaryImage.CheckImageDimensions());
-        }
-
-        [Fact]
-        public void CheckImageDimensions_TumbnailImageSizeExceed100KB_InvalidArticleImageSizeException()
-        {
-            Assert.Throws<InvalidArticleImageSizeException>(() => _articleThumbnailsImage.CheckImageDimensions());
+            _articleService.CheckArticleBody(
+                    MockArticle.GetBodyTextContains8ImageAndNoLargeImage());
         }
     }
 }
